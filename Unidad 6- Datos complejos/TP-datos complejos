@@ -1,0 +1,183 @@
+#TP DATOS COMPLEJOS
+#EJERCICIO 1,2 Y 3
+precios_frutas = {'Banana': 1200, 'Anana': 2500, 'Melon': 3000, 'Uva': 1450}
+print(precios_frutas)
+#1) agregar frutas= naranja = 1200 ,Manzana = 1500 ,Pera = 2300 
+bandera:bool=True
+while bandera :
+    print('''MENU FRUTAS-PRECIO
+          1)Agregar fruta
+          2)Modificar precio
+          3)Ver solo lista frutas
+          4)Salir''')
+    opcion_menu=input('Que desea realizar?')
+    
+    if opcion_menu =='1':
+        bandera_menu:bool=True
+        while bandera_menu:
+            fruta=input('Ingrese la fruta que desea agregar: ').capitalize()
+            precio:int=input('Ingrese el precio: ')
+            precios_frutas[fruta]=precio
+            opcion=input('Desea agregar algo mas? s/n').lower()
+            if opcion== "n":
+                print(f'Lista Actualizada {precios_frutas}')
+                bandera_menu=False
+      
+    #2)modificar precio de Banana = 1330 Manzana = 1700 ,Melón = 2800 
+    elif opcion_menu =='2':
+        bandera_menu:bool=True
+        while bandera_menu:
+            fruta=input('Fruta que desea modificar precio: ').capitalize()
+            precio:int=input('Ingrese el nuevo precio: ')
+            precios_frutas[fruta]=precio
+            opcion=input('Desea modificar algo mas? s/n').lower()
+            if opcion== "n":
+                print(f'Precios actualizados: {precios_frutas}')
+                bandera_menu=False
+#3)crear lista q contenga solo las frutas sin los precios                
+    elif opcion_menu=='3':
+        precios_frutas.keys()
+        print(precios_frutas.keys())
+              
+    elif opcion_menu=='4':
+        print('ADIOS')
+        bandera=False
+
+#EJERCICIO 4
+#Permití al usuario cargar 5 contactos con su nombre como clave y número como valor.
+contactos={}
+print("1-Carga de contactos: ")
+for i in range (5):
+
+    añade_cont=input("Ingrese nombre de contacto: ").capitalize().strip()
+    añade_num=input("Ingrese numero de telefono: ").strip()
+
+    contactos[añade_cont]=añade_num
+#Luego, pedí un nombre y mostrale el número asociado, si existe 
+print("Busqueda de contactos: ")
+busqueda=input("Ingrese contacto que desea buscar: ").capitalize().strip()
+print(contactos[busqueda])
+print (contactos)
+
+#EJERCICIO 5
+frase=input("Ingrese una frase: ").upper().strip()
+
+palabras=frase.split()# separo la frase palabra por palabra ,creandu una lista
+recuento={} #hago un diccionario vacio para luego agregar las palabras como claves y la cantidad como valor
+
+for palabra in palabras: # recorro la lista palabra por palabra
+    if palabra in recuento: #si la palabra ya esta en el diccionario , le sumamos 1
+        recuento[palabra]+=1 # aca se ve como al diccionario en la clave[palabra]le asignamos un nuevo valor +=1
+    else: #si no se encuentra , creamos una nueva clave y le asignamos el valor inicial 1
+        recuento[palabra]=1
+
+palabras_unicas=set(palabras) #crea un set de la lista "palabras" eliminando los duplicados
+print(palabras_unicas)
+print(recuento)
+
+#EJERCICIO 6
+alumnos={}
+
+for i in range (3):
+    nombre=input('Ingrese nombre del alumno: ').upper().strip()
+    notas=[]
+    for i in range(3):
+       nota:float=float(input(f'Ingrese la nota {i+1}: '))
+       notas.append(nota)
+    tupla_notas=tuple(notas)
+    alumnos[nombre]=tupla_notas
+
+
+print(alumnos)
+
+for nombre in alumnos:
+    promedio= sum(alumnos[nombre]) / 3
+    print(f'{nombre}: {promedio} promedio')
+
+#EJERCICIO 7
+parcial1={'juan','tomas','agus','fede'}
+parcial2={'sofia','agus', 'tomas','facu'}
+
+ambos_parciales= parcial1.intersection(parcial2)
+print(f'{ambos_parciales}: aprobaron ambos parciales')
+
+solo_1_parcial=parcial1.symmetric_difference(parcial2)
+print(f'{solo_1_parcial}: aprobaron solo un parcial')
+
+almenos_unparcial=parcial1.union(parcial2)
+print(f'{almenos_unparcial}: los que aprobaron al menos un parcial el 1 o 2')
+
+#EJERCICIO 8
+productos={'leche':6, 'avena':3, 'azucar':5}
+bandera_menu:bool=True
+
+while bandera_menu:
+    print('''Opciones, ingrese la que desee: 
+          1-Consultar stock de un producto
+          2-Agregar unidades al stock
+          3-Agregar nuevo producto
+          4-Salir''')
+    opcion=input().strip()
+    if opcion =='1':
+        consulta=input('Que producto desea consultar: ').lower().strip()
+        if consulta in productos.keys():
+            print(f'{consulta} , {productos[consulta]} stock disponible')
+        else:
+            print('Producto no encontrado ')
+    elif opcion=='2':
+        nombre=input('Ingrese nombre del producto que desea actualizar stock: ').lower().strip()
+        if nombre in productos.keys():
+            cantidad:int=int(input('En numeros enteros ingrese la cantidad q va a agregar: '))
+            productos[nombre]+=cantidad
+            print(f'{nombre} : {productos[nombre]} actualizado ')
+        else:
+            print('Producto no encontrado ')
+    elif opcion=='3':
+        agregar=input('Ingrese nombre del nuevo producto: ').lower().strip()
+        if agregar in productos.keys():
+            print('Ese producto ya existe ')
+        else:
+            unidades:int=int(input(f'Ingrese la cantidad de unidades para {agregar}:'))
+            if unidades<=0:
+                unidades=0
+                productos[agregar]=0
+            else:
+                productos[agregar]=unidades
+            print(f'{productos[agregar]} agregado exitosamente ')
+    elif opcion=='4':
+        print('adios...')
+        bandera_menu=False
+    else:
+        print('La opcion ingresada no es valida')
+
+#EJERCICIO 9
+agenda = {}  
+
+for i in range(3):
+    dia = input("Ingresa el dia: ").strip()
+    hora = input("Ingresa la hora: ").strip()
+    evento = input("Ingresa el evento: ").strip()
+    agenda[(dia, hora)] = evento #pongo dia y hora como claves
+
+# consultar un evento
+dia_consulta = input("Que dia queres consultar?: ").strip()
+hora_consulta = input("Que hora?: ").strip()
+
+if (dia_consulta, hora_consulta) in agenda:
+    print(f"El evento en {dia_consulta} a las {hora_consulta} es: {agenda[(dia_consulta, hora_consulta)]}")
+else:
+    print("No hay ningun evento en ese dia y hora.")
+
+#EJERCICIO 10
+paises = {
+    'argentina': 'buenos aires',
+    'brasil': 'brasilia',
+    'chile': 'santiago',
+    'uruguay': 'montevideo'}
+
+capitales = {}#nuevo diccionario para guardarlos pero invertidos
+
+for pais, capital in paises.items():#para cada pais ,capital q existe en el diccionario
+    capitales[capital] = pais#aca invertimos pais toma la posicion de valor y capital la posicion de clave
+    
+print(capitales)
